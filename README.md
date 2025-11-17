@@ -17,11 +17,11 @@ This project uses **machine learning** to automatically detect emails as **spam 
 
 
 ## Dataset 
-**source** : https://www.kaggle.com/datasets/wcukierski/enron-email-dataset (Enron Data Set) 
+**source** : https://www.kaggle.com/datasets/marcelwiechmann/enron-spam-data (Enron Data Set) 
 
 ## How it works
 1. Preprocess text
-2. Train models with Naive Bayes, Logistic Regression
+2. Train models with Random Forest, k-NN, SVM 
 3. Evaluate accuracy
 
 
