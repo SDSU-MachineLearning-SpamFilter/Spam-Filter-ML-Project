@@ -1,12 +1,12 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.svm import SVC
+from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 
+
 # step 1: load the data (will take some time to process as it is huge)
-print("Starting SVM script...")
 data = pd.read_csv('data/enron_spam_data.csv')
 print("CSV loaded successfully.")
 print("Number of rows:", len(data))
@@ -25,12 +25,19 @@ vectorizer = TfidfVectorizer(stop_words='english', max_features=10000, lowercase
 X_train_tfidf = vectorizer.fit_transform(X_train)
 X_test_tfidf = vectorizer.transform(X_test)
 
-# step 4: train SVM model
-svm_model = SVC(kernel='rbf', C=1.0, gamma='scale')
-svm_model.fit(X_train_tfidf, y_train)
+# step 4: train Passive-Aggressive model
+pa_model = PassiveAggressiveClassifier(
+    max_iter=1000,
+    C=1.0,
+    random_state=42,
+    tol=1e-3
+)
 
 # step 5: predict
-y_pred = svm_model.predict(X_test_tfidf)
+pa_model.fit(X_train_tfidf, y_train)
+
+# convert predictions back to original labels ("spam"/"ham")
+y_pred = pa_model.predict(X_test_tfidf)
 
 # step 6: evaluate
 print("Accuracy:", accuracy_score(y_test, y_pred))
