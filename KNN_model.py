@@ -16,8 +16,8 @@ def main():
     X = data['text']
     y = data['Spam/Ham']
 
-    # Step 3: Split dataset (using same test_size as PAC_model.py for consistency)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
+    # Step 3: Split dataset (using same test_size as randomforest.py for consistency)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
     print(f"Training samples: {len(X_train)}, Test samples: {len(X_test)}")
 
     # Step 4: Text vectorization using TF-IDF (same parameters as existing models)
